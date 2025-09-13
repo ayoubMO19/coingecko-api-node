@@ -1,61 +1,3 @@
-import axios from 'axios';
-import dotenv from "dotenv";
-import express from "express";
-import swaggerJSDoc from "swagger-jsdoc";
-import swaggerUi from "swagger-ui-express"
-import { standarizeTopTenCoins, standarizeDetailsCoin } from './controllers/coinController.js'
-
-// Sirve para permitir cargar todas las variables del .env y poder utilizarlas en cualquier parte del archivo index.js
-dotenv.config();
-// Carga una variable específica del .env
-const API_KEY = process.env.COINGECKO_API_KEY;
-
-// Creamos app express
-const app = express();
-// Definimos el puerto en el que escucha la app
-app.listen(3000)
-
-// Objeto de configuración swagger UI
-const swaggerOptions = {
-    definition: {
-        openapi: "3.0.0",
-        info: {
-            title: "ADVANCED CRYPTO ANALYST",
-            version: "1.0.0",
-            description: "API para obtener información relevante de criptomonedas, estadisticas, porcentajes, precios y detalles entre otro tipo de información de valor.",
-        },
-    },
-    apis: ["./index.js"] // aquí el swagger buscará ñps comentarios JSDoc
-}
-
-const swaggerDocs = swaggerJSDoc(swaggerOptions)
-
-// Exponemos la ruta de api-docs
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
-
-/**
- * @swagger
- * /ping:
- *   get:
- *     summary: Realizar ping
- *     description: Este método hace ping a la API de GoinGecko
- *     responses:
- *       200:
- *         description: Respuesta exitosa ping
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: (V3) To the Moon!
- */
-app.get("/ping", async (req, res) => {
-    const data = await pingCoingecko();
-    res.json({message: data});
-});
-
 /**
  * @swagger
  * /top-ten-coins:
@@ -170,7 +112,7 @@ app.get("/ping", async (req, res) => {
  *                   total_volume: 2392832545
  */
 app.get("/top-ten-coins", async (req, res) => {
-    const data = await standarizeTopTenCoins();
+    const data = await getTopTenCoins();
     res.json({message: data});
 });
 
@@ -309,24 +251,6 @@ app.get("/top-ten-coins", async (req, res) => {
  */
 
 app.get("/get-coin-details", async (req, res) => {
-    const data = await standarizeDetailsCoin(req.query.coinId);
+    const data = await getCoinDetails(req.query.coinId);
     res.json({message: data});
 });
-
-// Función para comprobar conexión con coingecko
-async function pingCoingecko(){
-    try {
-        // Definimos la variable que guardará la respuesta
-        const response = await 
-        axios.get(
-            "https://api.coingecko.com/api/v3/ping", // Param 1: URL del endpoin que deseamos 
-            {
-                headers: {"x-cg-demo-api-key": `${API_KEY}`} // Param 2: Headers con api key
-            }
-        );
-        // Retornamos la respuesta de la llamada
-        return response.data
-    } catch(error){
-        console.error(`Error en la función pingCoingecko. Detalles del error: ${error}`)
-    }
-}
