@@ -11,9 +11,8 @@ const API_KEY = process.env.COINGECKO_API_KEY;
 async function main(){
     // try catch para capturar errores
     try {
-       // await pingCoingecko(); // Ping para comprobar conexión con coingecko
-       // const topTenCoins = await getTopTenCoins(); // Obtención de top 10 coins
-       //console.log(topTenCoins)
+       await pingCoingecko(); // Ping para comprobar conexión con coingecko
+       const topTenCoins = await getTopTenCoins(); // Obtención de top 10 coins
        await getCoinDetails('bitcoin');
     } catch(error){
         console.error(`Error en la función main. Detalles del error: ${error}`)
@@ -86,6 +85,7 @@ async function standarizeTopTenCoins(data) {
         console.error(`Error en la función standarizeTopTenCoins. Detalles del error: ${error}`)
     }
 } 
+
 // Función para obtener información más detallada de 1 cryptomoneda específica
 async function getCoinDetails(coinId) {
     try{
@@ -96,12 +96,12 @@ async function getCoinDetails(coinId) {
             }
         )
         const coinDetails = await standarizeDetailsCoin(response.data)
-        console.log(`Detalles de la moneda con id ${coinId}: ${JSON.stringify(coinDetails)}`)
         return coinDetails;
     } catch(error){
         console.log(`Error en la función getCoinDetails. Detalles del error: ${error}`)
     }
 }
+
 // Función para estandarizar los datos de los detalles de una moneda específica
 async function standarizeDetailsCoin(data) {
     return {
