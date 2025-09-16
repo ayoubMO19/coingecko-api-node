@@ -1,6 +1,9 @@
+import { Router} from "express";
+const router = Router();
+
 /**
  * @swagger
- * /ping:
+ * tests/ping:
  *   get:
  *     summary: Realizar ping
  *     description: Este método hace ping a la API de GoinGecko
@@ -16,7 +19,9 @@
  *                   type: string
  *                   example: (V3) To the Moon!
  */
-app.get("/ping", async (req, res) => {
+router.get("/ping", async (req, res) => {
     const data = await pingCoingecko();
     res.json({message: data});
 });
+
+export default router;

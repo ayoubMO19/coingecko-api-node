@@ -1,6 +1,10 @@
+import { standarizeTopTenCoins, standarizeDetailsCoin } from '../controllers/coinController.js'
+import { Router } from 'express';
+const router = Router();
+
 /**
  * @swagger
- * /top-ten-coins:
+ * /coins/top-ten-coins:
  *   get:
  *     summary: Obtener top 10 mejores criptomonedas del momento actual
  *     description: Este método retorna un top 10 de las mejores criptomonedas del momento
@@ -111,14 +115,14 @@
  *                   price_change_percentage_24h: 5.7251
  *                   total_volume: 2392832545
  */
-app.get("/top-ten-coins", async (req, res) => {
-    const data = await getTopTenCoins();
+router.get("/top-ten-coins", async (req, res) => {
+    const data = await standarizeTopTenCoins();
     res.json({message: data});
 });
 
 /**
  * @swagger
- * /get-coin-details:
+ * /coins/get-coin-details:
  *   get:
  *     summary: Obtener información detallada de una criptomoneda
  *     description: Este método retorna información detallada de una criptomoneda específica
@@ -250,7 +254,9 @@ app.get("/top-ten-coins", async (req, res) => {
  *                   max_supply: 21000000
  */
 
-app.get("/get-coin-details", async (req, res) => {
-    const data = await getCoinDetails(req.query.coinId);
+router.get("/get-coin-details", async (req, res) => {
+    const data = await standarizeDetailsCoin(req.query.coinId);
     res.json({message: data});
 });
+
+export default router;

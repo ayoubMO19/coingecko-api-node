@@ -1,11 +1,11 @@
 import axios from "axios";
 import dotenv from "dotenv";
 
-// Sirve para permitir cargar todas las variables del .env y poder utilizarlas en cualquier parte del archivo index.js
+// Sirve para permitir cargar todas las variables del .env y poder utilizarlas en cualquier parte del archivo
 dotenv.config();
 // Carga una variable específica del .env
-
 const API_KEY = process.env.COINGECKO_API_KEY;
+
 // Función para obtener top 10 cryptomonedas
 async function getTopTenCoins(limit = 10, vs = "usd"){
     try {
