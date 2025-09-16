@@ -1,0 +1,115 @@
+/* Eliminar el logo original */
+.swagger-ui .topbar .link svg,
+.swagger-ui .topbar .link span {
+  display: none !important;
+}
+
+html, body {
+  background-color: #111 !important;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.swagger-ui {
+  min-height: 100vh; /* que ocupe toda la altura visible */
+}
+
+.responses-inner *, .opblock-description-wrapper *, .description * {
+    color: white !important;
+}
+
+
+.swagger-ui,
+.swagger-ui .scheme-container,
+.swagger-ui .opblock-tag,
+.swagger-ui .information-container,
+.swagger-ui .info {
+  background-color: #111 !important; /* gris muy oscuro */
+  color: #ffffff !important;            /* texto claro */
+}
+
+.swagger-ui .opblock-tag,
+.swagger-ui .title,
+.swagger-ui .markdown h1,
+.swagger-ui .markdown h2 {
+  color: #39ff14 !important; /* verde neón solo en títulos */
+}
+
+
+.swagger-ui .opblock-tag,
+.swagger-ui .title,
+.swagger-ui .markdown h1,
+.swagger-ui .markdown h2 {
+  color: #39ff14 !important; /* verde neón */
+}
+
+.swagger-ui .btn {
+  background-color: #39ff14 !important;
+  border: none !important;
+  color: #000 !important;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.swagger-ui .btn:hover {
+  background-color: #00cc00 !important;
+  box-shadow: 0 0 10px #39ff14;
+}
+
+.swagger-ui .opblock {
+  background-color: #1a1a1a !important;
+  border: 1px solid #333 !important;
+  border-radius: 8px;
+  color: white !important;
+}
+
+.swagger-ui .opblock-summary {
+  background-color: #222 !important;
+}
+
+.swagger-ui .opblock-summary * {
+  color: #ffffff !important;
+}
+
+.swagger-ui .opblock-summary:hover {
+  background-color: #333 !important;
+}
+
+.swagger-ui input,
+.swagger-ui textarea,
+.swagger-ui select {
+  background-color: #000 !important;
+  color: #39ff14 !important;
+  border: 1px solid #39ff14 !important;
+}
+
+/* Ajustar el contenedor del logo */
+.swagger-ui .topbar .link {
+  background: url('/images/logo.png') no-repeat center center !important;
+  background-size: contain !important;
+  background-position: center !important;
+
+  width: 160px !important;   /* ajusta al tamaño real de tu logo */
+  height: 40px !important;
+  display: block !important;
+
+  padding: 0 !important;
+  margin: 0 auto !important; /* lo centra en la barra */
+  text-align: center !important;
+}
+/* Fondo negro en la barra superior */
+.swagger-ui .topbar {
+  background-color: #000 !important;
+}
+
+/* Opcional: cambiar color del texto de la barra */
+.swagger-ui .topbar .download-url-wrapper input {
+  background-color: #222 !important;
+  color: #fff !important;
+  border: 1px solid #444 !important;
+}
+
+.swagger-ui .topbar .link span {
+  color: #fff !important;
+}

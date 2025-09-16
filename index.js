@@ -6,7 +6,12 @@ import testsRouter from './routes/tests.js';
 import globalRouter from './routes/global.js';
 import loginRouter from './routes/login.js';
 import jwt from 'jsonwebtoken';
+import path from "path";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 import dotenv from 'dotenv';
 dotenv.config();
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
@@ -42,7 +47,7 @@ const swaggerOptions = {
     definition: {
         openapi: "3.0.0",
         info: {
-            title: "ADVANCED CRYPTO ANALYST",
+            title: "Advanced Crypto Analyser",
             version: "1.0.0",
             description: "API para obtener información relevante de criptomonedas, estadisticas, porcentajes, precios y detalles entre otro tipo de información de valor.",
         },
@@ -63,8 +68,10 @@ const swaggerOptions = {
 // Asignamos las opciones de swagger a swaggerJSDoc
 const swaggerDocs = swaggerJSDoc(swaggerOptions)
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Exponemos la ruta de api-docs
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, {customCssUrl: '/css/custom-swagger.css'} ));
 
 // Proteger el uso de las llamadas limitado para usuarios autenticados
 app.use(authMiddleware);
