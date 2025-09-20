@@ -70,6 +70,11 @@ const swaggerDocs = swaggerJSDoc(swaggerOptions)
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
+// Redireccionamos la url por defecto a /api-docs
+app.get('/', (req, res) => {
+  res.redirect('/api-docs');
+});
+
 // Exponemos la ruta de api-docs
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, {customCssUrl: '/css/custom-swagger.css'} ));
 
