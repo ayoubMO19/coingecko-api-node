@@ -15,7 +15,7 @@ const __dirname = dirname(__filename);
 import dotenv from 'dotenv';
 dotenv.config();
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
-
+const PORT = process.env.PORT;
 // Auth Middlware configuration
 function authMiddleware(req, res, next) {
   if (req.path === '/login/login') return next(); // Permitir login sin token
@@ -40,7 +40,7 @@ function authMiddleware(req, res, next) {
 const app = express();
 
 // Definimos el puerto en el que escucha la app
-app.listen(3000)
+app.listen(PORT)
 
 // Objeto de configuración swagger UI
 const swaggerOptions = {
