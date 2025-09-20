@@ -9,10 +9,11 @@ import jwt from 'jsonwebtoken';
 import path from "path";
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-import dotenv from 'dotenv';
+
 dotenv.config();
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 const PORT = process.env.PORT;
@@ -62,7 +63,7 @@ const swaggerOptions = {
         },
         security: [{ bearerAuth: [] }] // Aplica a todas las rutas si se pone aquí
     },
-    apis: ["./index.js", "./routes/*.js"] // aquí el swagger buscará los comentarios JSDoc
+    apis: ["./routes/*.js"] // aquí el swagger buscará los comentarios JSDoc
 }
 
 // Asignamos las opciones de swagger a swaggerJSDoc
