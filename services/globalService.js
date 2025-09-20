@@ -9,7 +9,7 @@ const API_KEY = process.env.COINGECKO_API_KEY;
 async function getGlobalInfoAPI(){
     // Llamada API para obtenre información global del mercado    
     const response = await
-    axios.get('https://api.coingecko.com/api/v3//global',
+    axios.get('https://api.coingecko.com/api/v3/global',
         {
             headers: {"x-cg-demo-api-key": `${API_KEY}`},
         }
