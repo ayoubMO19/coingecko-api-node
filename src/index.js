@@ -41,6 +41,14 @@ function authMiddleware(req, res, next) {
 // Creamos app express
 const app = express();
 
+// Permitir al frontend realizar llamadas
+app.use(cors({
+    origin: "http://localhost:5173" //url donde esta el frontend React
+}));
+
+// Esto le indica a Express que parsea el cuerpo JSON de las peticiones HTTP y las pone en req.body
+app.use(express.json());
+
 // Definimos el puerto en el que escucha la app
 app.listen(PORT)
 
@@ -83,9 +91,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, {customCssUrl
 // Proteger el uso de las llamadas limitado para usuarios autenticados
 app.use(authMiddleware);
 
-// Esto le indica a Express que parsea el cuerpo JSON de las peticiones HTTP y las pone en req.body
-app.use(express.json());
-
 // Importar las rutas de coins
 app.use('/coins', coinsRouter);
 
@@ -100,8 +105,3 @@ app.use('/global', globalRouter);
 
 // Importar las rutas de login
 app.use('/login', loginRouter);
-
-// Permitir al frontend realizar llamadas
-app.use(cors({
-    origin: "http://localhost:5173" //url donde esta el frontend React
-}));
