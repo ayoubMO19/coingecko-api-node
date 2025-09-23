@@ -99,3 +99,8 @@ app.use('/global', globalRouter);
 
 // Importar las rutas de login
 app.use('/login', loginRouter);
+
+// Permitir al frontend realizar llamadas
+app.use(cors({
+    origin: "http://localhost:5173" //url donde esta el frontend React
+}));
