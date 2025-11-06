@@ -42,8 +42,8 @@ function authMiddleware(req, res, next) {
 const app = express();
 
 const allowedOrigins = [
-  'http://localhost:5173',                    // Desarrollo local
-  'https://coingecko-dashboard-react.vercel.app',  // Producción Vercel
+  'http://localhost:5173', // Desarrollo local
+  'https://vexa-dash.vercel.app', // Producción Vercel
 ];
 
 // Permitir al frontend realizar llamadas
