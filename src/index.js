@@ -41,9 +41,25 @@ function authMiddleware(req, res, next) {
 // Creamos app express
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:5173',                    // Desarrollo local
+  'https://coingecko-dashboard-react.vercel.app',  // Producción Vercel
+];
+
 // Permitir al frontend realizar llamadas
 app.use(cors({
-    origin: "http://localhost:5173" //url donde esta el frontend React
+  origin: function (origin, callback) {
+    // Permitir requests sin origin (como mobile apps, Postman, etc.)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      return callback(null, true);
+    } else {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+  },
+  credentials: true // Si usas cookies o autenticación
 }));
 
 // Esto le indica a Express que parsea el cuerpo JSON de las peticiones HTTP y las pone en req.body
