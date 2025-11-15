@@ -1,4 +1,5 @@
 import cron from 'node-cron';
+import axios from 'axios';
 
 // Función principal del cron donde se configuran y se inicializan los cron jobs necesarios
 export default function startCronJob() {
