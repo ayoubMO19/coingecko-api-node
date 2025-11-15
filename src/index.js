@@ -5,6 +5,7 @@ import coinsRouter from '../routes/coins.js';
 import testsRouter from '../routes/tests.js';
 import globalRouter from '../routes/global.js';
 import loginRouter from '../routes/login.js';
+import startCronJob from '../cronjobs/cron.js';
 import jwt from 'jsonwebtoken';
 import path from "path";
 import { dirname } from 'path';
@@ -121,3 +122,6 @@ app.use('/global', globalRouter);
 
 // Importar las rutas de login
 app.use('/login', loginRouter);
+
+// Inciación de cronjob
+startCronJob();
