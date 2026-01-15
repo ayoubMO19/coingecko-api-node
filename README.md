@@ -12,13 +12,17 @@ API robusta construida con Node.js y Express para obtener información relevante
 
 ## 📁 Estructura del Proyecto
 ```
-📁 config/           # Configuraciones (Swagger, Variables de entorno) 
-📁 middlewares/      # Middlewares (Auth, Error handler) 
-📁 routes/           # Definición de rutas y endpoints 
-📁 public/           # Archivos estáticos (CSS personalizado para Swagger)
-📄 app.js            # Configuración de Express y middlewares
-📄 server.js         # Punto de entrada y arranque del servidor
-🔒 .env              # Variables de entorno (no incluido en el repo)
+📁 proyecto-raíz/
+├── 📁 src/
+│   ├── 📁 config/           # Configuraciones (Swagger, Variables de entorno)
+│   ├── 📁 middlewares/      # Middlewares (Auth, Error handler)
+│   ├── 📁 controllers/      # Controladores de lógica
+│   ├── 📁 services/         # Servicios y lógica de negocio
+│   ├── 📁 routes/           # Definición de rutas y endpoints
+│   ├── 📄 app.js            # Configuración de Express y middlewares
+│   └── 📄 server.js         # Punto de entrada y arranque del servidor
+├── 📁 public/               # Archivos estáticos (CSS personalizado para Swagger)
+└── 🔒 .env                  # Variables de entorno (no incluido en el repo)
 ```
 ## 🚀 Instalación y Uso
 1. **Clona el repositorio:**
