@@ -11,6 +11,7 @@ API robusta construida con Node.js y Express para obtener información relevante
 - **Dotenv** (Gestión de variables de entorno)
 
 ## 📁 Estructura del Proyecto
+```
 📁 config/           # Configuraciones (Swagger, Variables de entorno) 
 📁 middlewares/      # Middlewares (Auth, Error handler) 
 📁 routes/           # Definición de rutas y endpoints 
@@ -18,7 +19,7 @@ API robusta construida con Node.js y Express para obtener información relevante
 📄 app.js            # Configuración de Express y middlewares
 📄 server.js         # Punto de entrada y arranque del servidor
 🔒 .env              # Variables de entorno (no incluido en el repo)
-
+```
 ## 🚀 Instalación y Uso
 1. **Clona el repositorio:**
 git clone [repo](https://github.com/ayoubMO19/coingecko-api-node.git)
