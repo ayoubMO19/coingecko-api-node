@@ -1,11 +1,11 @@
 import {getTopTenCoins, getCoinDetails} from '../services/coinService.js'
+
 // Función para estandarizar los datos del top 10 coins
 async function standarizeTopTenCoins() {
     try{
         const data = await getTopTenCoins() 
         let standarizedData = [];
         data.forEach(coin => {
-            // console.log(coin.name, coin.symbol, coin.current_price, coin.market_cap, coin.market_cap_rank, coin.price_change_percentage_24h, coin.total_volume) 
             standarizedData.push({
                 "name": coin.name,
                 "symbol": coin.symbol,

@@ -1,5 +1,6 @@
 
 import { getGlobalInfoAPI } from '../services/globalService.js'
+
 // Función para obtener información global del mercado de criptomonedas
 async function getGlobalInfo() {
     try {

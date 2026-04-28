@@ -103,7 +103,6 @@ html, body {
   background-color: #000 !important;
 }
 
-/* Opcional: cambiar color del texto de la barra */
 .swagger-ui .topbar .download-url-wrapper input {
   background-color: #222 !important;
   color: #fff !important;
