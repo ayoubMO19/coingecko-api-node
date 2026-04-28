@@ -14,20 +14,19 @@ import { authMiddleware } from './middleware/auth.js';
 import { corsMiddleware } from './middleware/cors.js';
 import { swaggerOptions } from './config/swagger.js';
 
+const PORT = process.env.PORT;
+const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS;
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 dotenv.config();
-const PORT = process.env.PORT;
 
 const app = express();
 app.use(express.json());
 app.listen(PORT)
 
-const allowedOrigins = [
-  'http://localhost:5173', // Desarrollo local
-  'https://vexa-dash.vercel.app', // Producción Vercel
-]; // TODO: Mover a variable de entorno
+const allowedOrigins = ALLOWED_ORIGINS.split(',');
 
 // Permitir al frontend realizar llamadas
 app.use(corsMiddleware(allowedOrigins));
