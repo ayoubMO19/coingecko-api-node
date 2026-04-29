@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "API REST en Node.js que consume y maneja datos de la API de Coingecko sobre criptomonedas.",
   "main": "./src/server.js",
+  "type": "module",
   "scripts": {
     "start": "node ./src/server.js"
   },
@@ -16,6 +17,7 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "node-cron": "^4.2.1",
+    "redis": "^5.12.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   }

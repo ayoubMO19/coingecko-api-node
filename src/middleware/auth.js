@@ -5,7 +5,7 @@ dotenv.config();
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 // Auth Middlware configuration
-function authMiddleware(req, res, next) {
+export function authMiddleware(req, res, next) {
   if (req.path === '/login/login') return next(); // Permitir login sin token
 
   const authHeader = req.headers.authorization;
