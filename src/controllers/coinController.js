@@ -14,7 +14,7 @@ export async function getTopTenCoinsController(req, res) {
 export async function getCoinDetailsController(req, res) {
     try {
         const { coinId } = req.query;
-        const data = await getCoinDetails(coinId)
+        const data = await getCoinDetails(coinId.toLowerCase());
         res.json({ message: data });
     } catch(error) {
         res.status(500).json({ error: "Internal server error" });

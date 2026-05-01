@@ -39,7 +39,7 @@ const topTenCoinsOptions = {
     ttl: 300
 }
 
-const topTenCoinsCached = cacheWrapper(fetchTopTenCoins, topTenCoinsOptions);
+const topTenCoinsCached = await cacheWrapper(fetchTopTenCoins, topTenCoinsOptions);
 
 // Función para obtener y estandarizar los datos del top 10 coins
 export async function getTopTenCoins() {
@@ -57,7 +57,7 @@ export async function getTopTenCoins() {
         }));
 
     } catch(error) {
-        console.error(`Error en la función getTopTenCoins.`)
+        console.error(`Error en la función getTopTenCoins. Detalles del error: ${error}`);
         throw error;
     }
 } 
@@ -72,7 +72,7 @@ async function fetchCoinDetails(coinId) {
         );
         return response.data;
     } catch(error){
-        console.log(`Error en la función getCoinDetails. Detalles del error: ${error}`);
+        console.error(`Error en la función getCoinDetails. Detalles del error: ${error}`);
         throw error;
     }
 }
@@ -84,7 +84,7 @@ const coinDetailsOptions = {
     ttl: 150
 };
 
-const coinDetailsCached = cacheWrapper(fetchCoinDetails, coinDetailsOptions);
+const coinDetailsCached = await cacheWrapper(fetchCoinDetails, coinDetailsOptions);
 
 // Función para obtener y estandarizar los detalles de 1 moneda por su id
 export async function getCoinDetails(coinId) {
@@ -119,7 +119,7 @@ export async function getCoinDetails(coinId) {
             }
         }
     } catch(error) {
-        console.error(`Error en la función standarizeDetailsCoin. Detalles del error: ${error}`);
+        console.error(`Error en la función getCoinDetails. Detalles del error: ${error}`);
         throw error;
     }
 }
