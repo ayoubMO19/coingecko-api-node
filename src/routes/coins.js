@@ -1,5 +1,6 @@
-import { standarizeTopTenCoins, standarizeDetailsCoin } from '../controllers/coinController.js'
+import { getTopTenCoinsController, getCoinDetailsController } from '../controllers/coinController.js'
 import { Router } from 'express';
+
 const router = Router();
 
 /**
@@ -115,10 +116,7 @@ const router = Router();
  *                   price_change_percentage_24h: 5.7251
  *                   total_volume: 2392832545
  */
-router.get("/top-ten-coins", async (req, res) => {
-    const data = await standarizeTopTenCoins();
-    res.json({message: data});
-});
+router.get("/top-ten-coins", getTopTenCoinsController);
 
 /**
  * @swagger
@@ -253,10 +251,6 @@ router.get("/top-ten-coins", async (req, res) => {
  *                   total_supply: 19919928
  *                   max_supply: 21000000
  */
-
-router.get("/get-coin-details", async (req, res) => {
-    const data = await standarizeDetailsCoin(req.query.coinId);
-    res.json({message: data});
-});
+router.get("/get-coin-details", getCoinDetailsController);
 
 export default router;
