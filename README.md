@@ -1,95 +1,139 @@
-# 🚀 Advanced Crypto Analyser API
+# Advanced Crypto Analyser API
 
-API REST profesional en Node.js que consume y procesa datos de la API de CoinGecko para análisis de criptomonedas en tiempo real.
+<div align="center">
 
-## 🏗️ Arquitectura
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat&logo=redis&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?style=flat&logo=jsonwebtokens&logoColor=white)
+![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=flat&logo=swagger&logoColor=black)
 
-```
-src/
-├── controllers/     # Lógica de controladores MVC
-├── routes/          # Definición de rutas REST
-├── services/        # Lógica de negocio y llamadas a APIs
-├── middleware/      # Autenticación y CORS
-├── config/          # Configuración Swagger y variables
-├── cronjobs/        # Tareas programadas
-└── index.js         # Punto de entrada
-```
+</div>
 
-## ⚡ Características Técnicas
-
-- **🔐 Autenticación JWT** con middleware personalizado
-- **📚 Documentación Swagger/OpenAPI 3.0** auto-generada
-- **🌐 CORS configurable** para múltiples orígenes
-- **⏰ Tareas programadas** con node-cron
-- **🏛️ Arquitectura MVC** con separación de responsabilidades
-- **🔧 Variables de entorno** para configuración segura
-
-## 🛠️ Stack Tecnológico
-
-- **Node.js** + **Express.js** - Backend framework
-- **JWT** - Autenticación y autorización
-- **Swagger/OpenAPI** - Documentación de API
-- **Axios** - Cliente HTTP para llamadas a CoinGecko
-- **node-cron** - Tareas programadas
-- **dotenv** - Gestión de variables de entorno
-
-## 📡 Endpoints Principales
-
-### 🔍 Datos de Mercado
-- `GET /coins/top-ten-coins` - Top 10 criptomonedas
-- `GET /coins/details/{id}` - Detalles de criptomoneda
-- `GET /global/global` - Estadísticas globales del mercado
-
-### 🔐 Autenticación
-- `POST /login/login` - Generación de token JWT
-
-### 📚 Documentación
-- `GET /api-docs` - Interfaz Swagger UI
-
-## 🚀 Instalación y Ejecución
-
-```bash
-# Clonar repositorio
-git clone https://github.com/ayoubMO19/coingecko-api-node.git
-cd coingecko-api-node
-
-# Instalar dependencias
-npm install
-
-# Configurar variables de entorno
-cp .env.example .env
-# Editar .env con tus credenciales
-
-# Iniciar servidor
-npm start
-```
-
-## 🔧 Variables de Entorno
-
-```env
-PORT=3000
-JWT_SECRET_KEY=tu_secreto_jwt
-ALLOWED_ORIGINS=http://localhost:5173,https://tudominio.com
-```
-
-## 📊 APIs Externas Consumidas
-
-- **CoinGecko API v3** - Datos de criptomonedas
-  - `/api/v3/ping` - Health check
-  - `/api/v3/coins/markets` - Datos de mercado
-  - `/api/v3/coins/{id}` - Detalles específicos
-  - `/api/v3/global` - Estadísticas globales
-
-## 🎯 Aspectos Destacados
-
-- ✅ **Código limpio y mantenible** con patrón MVC
-- ✅ **Seguridad implementada** con JWT y CORS
-- ✅ **Documentación completa** con Swagger UI
-- ✅ **Configuración externalizada** con variables de entorno
-- ✅ **Arquitectura escalable** y modular
-- ✅ **Manejo de errores** robusto
-- ✅ **Tareas automatizadas** para actualización de datos
+Professional Node.js REST API designed to consume, process, and analyze real-time cryptocurrency data from the CoinGecko API, optimized with a high-performance Redis caching layer.
 
 ---
 
-**Desarrollado con Node.js y mejores prácticas de desarrollo de software.**
+## 🚀 Tech Stack
+
+* **Backend Core:** Node.js & Express.js
+* **Caching Layer:** Redis
+* **Authentication:** JSON Web Tokens (JWT)
+* **API Documentation:** Swagger / OpenAPI 3.0
+* **HTTP Client:** Axios (CoinGecko API v3 Integration)
+* **Automation:** node-cron (Scheduled background tasks)
+* **Environment Management:** dotenv
+
+---
+
+## ✨ Key Features
+
+### Performance & Automation
+
+* ⚡ **Redis Caching Layer:** Caches frequently requested market data to significantly reduce external API latency and optimize overall response times.
+* ⏰ **Automated Crons:** Scheduled background jobs powered by `node-cron` to keep historical data up to date without manual intervention.
+
+### Security & Architecture
+
+* 🔐 **Secure Access Control:** Custom JWT middleware for stateless endpoint authorization.
+* 🌐 **Configurable CORS:** Multi-origin CORS setup ready for production environments.
+* 🏛️ **Decoupled MVC Pattern:** Clean separation of routes, controllers, services, and middlewares to ensure high code maintainability.
+
+### API Documentation & Integration
+
+* 📚 **Interactive API Docs:** Auto-generated Swagger UI accessible directly via web browser.
+* 📡 **Resilient External Fetching:** Optimized integration targeting multiple CoinGecko v3 production endpoints.
+
+---
+
+## ⚡ Redis Caching Layer
+
+The application integrates Redis to intercept frequent requests to CoinGecko's rate-limited endpoints.
+
+### Core Benefits:
+* **Reduced Latency:** Millisecond-level delivery for top-tier assets and global market states.
+* **API Rate-Limit Protection:** Significantly lowers heavy direct outbound hits to CoinGecko API.
+* **Scalability:** Prepares the server instances to serve massive parallel client read volumes.
+* **Temporary Persistence:** Smart time-to-live (TTL) strategies configured for dynamic market data.
+
+---
+
+## 🏗️ Architecture
+
+The project follows a refactored Model-View-Controller (MVC) directory breakdown:
+
+```text
+src/
+├── config/          # Swagger configuration and initial app bindings
+├── controllers/     # Request routers, parameter parsing and HTTP responses
+├── cronjobs/        # Programmed scripts for background updates
+├── middleware/      # Global error handlers, JWT authentication, and CORS security
+├── routes/          # REST route declarations mapping to controllers
+├── services/        # Business logic operations and outbound API wrapper clients
+├── app.js           # Express instance initialization and middleware attachments
+├── index.js         # Master cluster entry point execution script
+└── server.js        # Server network listener bindings and port execution lifecycle
+```
+
+---
+
+## 📡 Core API Endpoints
+
+### 🔍 Market Insights
+* `GET /coins/top-ten-coins` - Lists top 10 ranked assets
+* `GET /coins/details/{id}` - Complete metric profile for an asset ID
+* `GET /global/global` - Worldwide total cryptocurrency statistics
+
+### 🔐 Authentication
+* `POST /login/login` - Secure user identification & JWT token payload generation
+
+### 📚 Interactive Docs
+* `GET /api-docs` - Live Swagger UI instance
+
+---
+
+## ▶️ Quick Start
+
+### Prerequisites
+
+* Node.js 18+
+* Redis Server instance active
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/ayoubMO19/coingecko-api-node.git
+   cd coingecko-api-node
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables:**
+   ```bash
+   cp .env.example .env
+   ```
+
+4. **Configure your configuration inside `.env`:**
+   ```env
+   PORT=3000
+   JWT_SECRET_KEY=your_jwt_secret_key_here
+   ALLOWED_ORIGINS=http://localhost:5173,https://yourdomain.com
+   REDIS_URL=redis://localhost:6373
+   ```
+
+5. **Start production server:**
+   ```bash
+   npm start
+   ```
+
+---
+
+## 👨‍💻 Author
+
+**Ayoub Morghi Ouhda**
+
+Full Stack Developer | Node.js · TypeScript · React · Java · SQL/NoSQL
